@@ -40,7 +40,7 @@ fn extract_import(line: &str) -> Option<String> {
 }
 
 #[test]
-fn test_extract_import_paths() {
+fn test_extract_import() {
     let cases = [
         ("import x from 'foo';", Some("foo")),
         ("import { y } from './bar';", Some("./bar")),
