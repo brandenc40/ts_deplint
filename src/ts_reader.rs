@@ -31,7 +31,7 @@ pub fn read_ts_imports(ts_path: &Path) -> io::Result<Vec<String>> {
 }
 
 static IMPORT_REGEX: LazyLock<Regex> =
-    LazyLock::new(|| Regex::new(r#"(?:from|import)+\s+["']([^"']+)["'];"#).unwrap());
+    LazyLock::new(|| Regex::new(r#"(?:from|import)+\s+["']([^"']+)["']"#).unwrap());
 
 fn extract_import(line: &str) -> Option<String> {
     let captures = IMPORT_REGEX.captures(line)?;
@@ -40,7 +40,7 @@ fn extract_import(line: &str) -> Option<String> {
 }
 
 #[test]
-fn test_extract_import() {
+fn test_extract_import_paths() {
     let cases = [
         ("import x from 'foo';", Some("foo")),
         ("import { y } from './bar';", Some("./bar")),
